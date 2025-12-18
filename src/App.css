@@ -57,17 +57,61 @@ body {
   color: var(--text-dark);
   background-color: var(--bg-light);
   line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .app {
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .main {
   flex: 1;
   padding: var(--spacing-lg) 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Telegram Mini App Specific Styles */
+body.telegram-app {
+  background-color: transparent;
+  height: 100vh;
+  height: -webkit-fill-available;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.telegram-app .app {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+body.telegram-app .header {
+  position: relative;
+  top: 0;
+}
+
+body.telegram-app .footer {
+  display: none;
+}
+
+body.telegram-app .main {
+  padding: var(--spacing-sm) 0;
+}
+
+body.telegram-app .hero {
+  padding: var(--spacing-lg) 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+body.telegram-app .container {
+  padding: 0 var(--spacing-sm);
 }
 
 /* ==========================================
@@ -92,6 +136,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%;
 }
 
 .header .container {
@@ -1158,6 +1203,7 @@ textarea.form-control {
   .category-filter {
     overflow-x: auto;
     flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
   }
   
   .nav {
@@ -1179,6 +1225,27 @@ textarea.form-control {
   .admin-tabs {
     overflow-x: auto;
     flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Telegram-specific mobile adjustments */
+@media (max-width: 768px) {
+  body.telegram-app .hero h1 {
+    font-size: 1.5rem;
+  }
+  
+  body.telegram-app .hero {
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  body.telegram-app .products-grid {
+    gap: var(--spacing-sm);
+  }
+  
+  body.telegram-app .header {
+    padding: var(--spacing-sm) 0;
   }
 }
 
@@ -1206,6 +1273,26 @@ textarea.form-control {
   .cart-item-image {
     width: 100%;
     height: 150px;
+  }
+}
+
+/* Telegram Mini App - Small screens */
+@media (max-width: 480px) {
+  body.telegram-app .container {
+    padding: 0 var(--spacing-xs);
+  }
+  
+  body.telegram-app .hero {
+    padding: var(--spacing-sm);
+  }
+  
+  body.telegram-app .products-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xs);
+  }
+  
+  body.telegram-app .product-card {
+    margin-bottom: var(--spacing-xs);
   }
 }
 

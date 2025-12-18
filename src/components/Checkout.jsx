@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ArrowLeft, CheckCircle } from 'lucide-react'
 import { createOrder } from '../utils/supabase'
+import { sendOrderNotification } from '../utils/telegram'
 
 function Checkout({ cart, total, onBack, onSuccess }) {
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -26,7 +27,25 @@ function Checkout({ cart, total, onBack, onSuccess }) {
         items: cart
       }
 
-      await createOrder(orderData)
+      const order = await createOrder(orderData)
+      
+      // Try to send Telegram notification (optional)
+      try {
+        const botToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN
+        const adminChatId = import.meta.env.VITE_TELEGRAM_ADMIN_CHAT_ID
+        
+        if (botToken && adminChatId) {
+          await sendOrderNotification(
+            { ...order, items: cart },
+            botToken,
+            adminChatId
+          )
+        }
+      } catch (notifError) {
+        console.log('Telegram notification failed:', notifError)
+        // Don't fail the order if notification fails
+      }
+      
       setSuccess(true)
       
       // Clear cart after successful order

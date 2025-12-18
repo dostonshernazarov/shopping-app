@@ -6,10 +6,24 @@ import ProductDetail from './components/ProductDetail'
 import Cart from './components/Cart'
 import AdminLogin from './components/Admin/AdminLogin'
 import AdminPanel from './components/Admin/AdminPanel'
+import { initTelegramApp, isTelegramApp } from './utils/telegram'
 
 function App() {
   const [cart, setCart] = useState([])
   const [isAdmin, setIsAdmin] = useState(false)
+  const [isTelegram, setIsTelegram] = useState(false)
+
+  // Initialize Telegram Mini App
+  useEffect(() => {
+    const tg = initTelegramApp()
+    if (tg) {
+      setIsTelegram(true)
+      console.log('Telegram Mini App initialized')
+      
+      // Add telegram class to body for specific styling
+      document.body.classList.add('telegram-app')
+    }
+  }, [])
 
   // Load cart from localStorage on mount
   useEffect(() => {
