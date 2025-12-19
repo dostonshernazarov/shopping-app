@@ -98,12 +98,10 @@ function App() {
       <div className="app">
         <header className="header">
           <div className="container">
-            {!isTelegram && (
-              <Link to="/" className="logo">
-                <Store size={32} />
-                <span>{t('app.name')}</span>
-              </Link>
-            )}
+            <Link to="/" className="logo">
+              <Store size={32} />
+              {!isTelegram && <span>{t('app.name')}</span>}
+            </Link>
             <nav className="nav">
               {!isTelegram && (
                 <Link to="/" className="nav-link">

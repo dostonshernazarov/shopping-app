@@ -78,7 +78,12 @@
     "briefDescription": "Qisqa tavsif",
     "fullDescription": "To'liq tavsif",
     "imageUrl": "Rasm URL",
-    "imageHint": "Unsplash, Imgur yoki Supabase Storage dan foydalanishingiz mumkin",
+    "imageHint": "Asosiy mahsulot rasmi (mahsulot kartalarida ko'rsatiladi)",
+    "additionalImages": "Qo'shimcha rasmlar",
+    "additionalImagesHint": "Mahsulot tafsilotlarida ko'rsatish uchun bir nechta rasm qo'shing",
+    "addImage": "Rasm qo'shish",
+    "removeImage": "Rasmni olib tashlash",
+    "add": "Qo'shish",
     "inStock": "Omborda mavjud",
     "category": "Kategoriya",
     "selectCategory": "Kategoriyani tanlang"

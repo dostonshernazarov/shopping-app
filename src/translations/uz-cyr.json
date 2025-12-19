@@ -78,7 +78,12 @@
     "briefDescription": "Қисқа тавсиф",
     "fullDescription": "Тўлиқ тавсиф",
     "imageUrl": "Расм URL",
-    "imageHint": "Unsplash, Imgur ёки Supabase Storage дан фойдаланишингиз мумкин",
+    "imageHint": "Асосий маҳсулот расми (маҳсулот карталарида кўрсатилади)",
+    "additionalImages": "Қўшимча расмлар",
+    "additionalImagesHint": "Маҳсулот тафсилотларида кўрсатиш учун бир нечта расм қўшинг",
+    "addImage": "Расм қўшиш",
+    "removeImage": "Расмни олиб ташлаш",
+    "add": "Қўшиш",
     "inStock": "Омборда мавжуд",
     "category": "Категория",
     "selectCategory": "Категорияни танланг"

@@ -513,16 +513,90 @@ body.telegram-app .container {
   margin-top: var(--spacing-lg);
 }
 
-.product-detail-image {
+.product-detail-images {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.product-detail-main-image {
   border-radius: var(--radius-lg);
   overflow: hidden;
   background-color: var(--bg-light);
 }
 
-.product-detail-image img {
+.product-detail-main-image img {
   width: 100%;
   height: 500px;
   object-fit: cover;
+}
+
+.product-additional-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.product-additional-image {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--bg-light);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.product-additional-image:hover {
+  transform: scale(1.05);
+}
+
+.product-additional-image img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* Additional Images Form Styles */
+.additional-images-input {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.additional-images-input .form-control {
+  flex: 1;
+}
+
+.additional-images-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.additional-image-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background-color: var(--bg-light);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.preview-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.image-url {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .product-detail-info {
@@ -1522,10 +1596,10 @@ body.telegram-app .header {
 }
 
 body.telegram-app .header .container {
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
-body.telegram-app .logo {
+body.telegram-app .logo span {
   display: none;
 }
 

@@ -78,7 +78,12 @@
     "briefDescription": "Краткое описание",
     "fullDescription": "Полное описание",
     "imageUrl": "URL изображения",
-    "imageHint": "Вы можете использовать Unsplash, Imgur или загрузить в Supabase Storage",
+    "imageHint": "Основное изображение продукта (показывается на карточках продуктов)",
+    "additionalImages": "Дополнительные изображения",
+    "additionalImagesHint": "Добавьте несколько изображений для отображения на странице деталей продукта",
+    "addImage": "Добавить изображение",
+    "removeImage": "Удалить изображение",
+    "add": "Добавить",
     "inStock": "В наличии",
     "category": "Категория",
     "selectCategory": "Выберите категорию"

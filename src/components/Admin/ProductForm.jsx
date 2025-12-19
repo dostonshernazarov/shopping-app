@@ -1,17 +1,21 @@
 import { useState } from 'react'
 import { addProduct, deleteProduct } from '../../utils/supabase'
-import { Trash2 } from 'lucide-react'
+import { useLanguage } from '../../contexts/LanguageContext'
+import { Trash2, Plus, X } from 'lucide-react'
 
 function ProductForm({ categories, onSuccess, onCancel }) {
+  const { t } = useLanguage()
   const [formData, setFormData] = useState({
     name: '',
     price: '',
     brief_description: '',
     full_description: '',
     image_url: '',
+    additional_images: [],
     category_id: '',
     in_stock: true
   })
+  const [additionalImageUrl, setAdditionalImageUrl] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -20,6 +24,23 @@ function ProductForm({ categories, onSuccess, onCancel }) {
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
+    }))
+  }
+
+  const addAdditionalImage = () => {
+    if (additionalImageUrl.trim()) {
+      setFormData(prev => ({
+        ...prev,
+        additional_images: [...prev.additional_images, additionalImageUrl.trim()]
+      }))
+      setAdditionalImageUrl('')
+    }
+  }
+
+  const removeAdditionalImage = (index) => {
+    setFormData(prev => ({
+      ...prev,
+      additional_images: prev.additional_images.filter((_, i) => i !== index)
     }))
   }
 
@@ -121,7 +142,7 @@ function ProductForm({ categories, onSuccess, onCancel }) {
       </div>
 
       <div className="form-group">
-        <label htmlFor="image_url">Image URL</label>
+        <label htmlFor="image_url">{t('admin.imageUrl')} *</label>
         <input
           type="url"
           id="image_url"
@@ -129,11 +150,62 @@ function ProductForm({ categories, onSuccess, onCancel }) {
           value={formData.image_url}
           onChange={handleChange}
           className="form-control"
-          placeholder="https://example.com/image.jpg"
+          placeholder={t('admin.imageUrl')}
+          required
         />
         <small className="form-hint">
-          You can use Unsplash, Imgur, or upload to Supabase Storage
+          {t('admin.imageHint')}
         </small>
+      </div>
+
+      <div className="form-group">
+        <label>{t('admin.additionalImages')}</label>
+        <div className="additional-images-input">
+          <input
+            type="url"
+            value={additionalImageUrl}
+            onChange={(e) => setAdditionalImageUrl(e.target.value)}
+            className="form-control"
+            placeholder={t('admin.imageUrl')}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                addAdditionalImage()
+              }
+            }}
+          />
+          <button
+            type="button"
+            onClick={addAdditionalImage}
+            className="btn btn-primary btn-icon"
+            title={t('admin.addImage')}
+          >
+            <Plus size={18} />
+            {t('admin.add')}
+          </button>
+        </div>
+        <small className="form-hint">
+          {t('admin.additionalImagesHint')}
+        </small>
+        
+        {formData.additional_images.length > 0 && (
+          <div className="additional-images-list">
+            {formData.additional_images.map((url, index) => (
+              <div key={index} className="additional-image-item">
+                <img src={url} alt={`${t('admin.additionalImages')} ${index + 1}`} className="preview-image" />
+                <span className="image-url">{url}</span>
+                <button
+                  type="button"
+                  onClick={() => removeAdditionalImage(index)}
+                  className="btn btn-danger btn-icon-small"
+                  title={t('admin.removeImage')}
+                >
+                  <X size={16} />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="form-group">

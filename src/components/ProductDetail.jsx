@@ -64,11 +64,26 @@ function ProductDetail({ addToCart }) {
       </button>
 
       <div className="product-detail">
-        <div className="product-detail-image">
-          <img
-            src={product.image_url || 'https://via.placeholder.com/600x400?text=No+Image'}
-            alt={product.name}
-          />
+        <div className="product-detail-images">
+          <div className="product-detail-main-image">
+            <img
+              src={product.image_url || 'https://via.placeholder.com/600x400?text=No+Image'}
+              alt={product.name}
+            />
+          </div>
+          
+          {product.additional_images && product.additional_images.length > 0 && (
+            <div className="product-additional-images">
+              {product.additional_images.map((imageUrl, index) => (
+                <div key={index} className="product-additional-image">
+                  <img
+                    src={imageUrl}
+                    alt={`${product.name} - Image ${index + 1}`}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="product-detail-info">
