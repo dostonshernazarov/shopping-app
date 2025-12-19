@@ -586,6 +586,28 @@ body.telegram-app .container {
   box-shadow: var(--shadow-md);
 }
 
+.btn-added {
+  background-color: var(--success-color) !important;
+  animation: pulse 0.5s ease-out;
+}
+
+.btn-added:hover {
+  background-color: var(--success-color) !important;
+  transform: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .btn-large {
   padding: var(--spacing-md) var(--spacing-lg);
   font-size: 1.125rem;
@@ -1243,6 +1265,132 @@ textarea.form-control {
 
 .footer p {
   margin: 0;
+}
+
+/* ==========================================
+   TOAST NOTIFICATIONS
+   ========================================== */
+
+.toast-container {
+  position: fixed;
+  top: 80px;
+  right: var(--spacing-md);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--bg-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  min-width: 300px;
+  max-width: 400px;
+  pointer-events: auto;
+  animation: slideInRight 0.3s ease-out;
+  border-left: 4px solid var(--success-color);
+}
+
+.toast-success {
+  border-left-color: var(--success-color);
+}
+
+.toast-error {
+  border-left-color: var(--error-color);
+}
+
+.toast-warning {
+  border-left-color: var(--warning-color);
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex: 1;
+}
+
+.toast-icon {
+  color: var(--success-color);
+  flex-shrink: 0;
+}
+
+.toast-error .toast-icon {
+  color: var(--error-color);
+}
+
+.toast-warning .toast-icon {
+  color: var(--warning-color);
+}
+
+.toast-message {
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.toast-close:hover {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Toast responsive */
+@media (max-width: 768px) {
+  .toast-container {
+    top: 70px;
+    right: var(--spacing-sm);
+    left: var(--spacing-sm);
+  }
+  
+  .toast {
+    min-width: auto;
+    max-width: 100%;
+  }
+}
+
+/* Telegram Mini App toast adjustments */
+body.telegram-app .toast-container {
+  top: 60px;
+  right: var(--spacing-xs);
+  left: var(--spacing-xs);
+}
+
+body.telegram-app .toast {
+  padding: var(--spacing-sm);
+  font-size: 0.9rem;
 }
 
 /* ==========================================

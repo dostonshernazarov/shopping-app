@@ -7,12 +7,24 @@ import Cart from './components/Cart'
 import AdminLogin from './components/Admin/AdminLogin'
 import AdminPanel from './components/Admin/AdminPanel'
 import ContactFooter from './components/ContactFooter'
+import ToastContainer from './components/ToastContainer'
 import { initTelegramApp, isTelegramApp } from './utils/telegram'
 
 function App() {
   const [cart, setCart] = useState([])
   const [isAdmin, setIsAdmin] = useState(false)
   const [isTelegram, setIsTelegram] = useState(false)
+  const [toasts, setToasts] = useState([])
+
+  // Toast notification helper
+  const showToast = (message, type = 'success', duration = 3000) => {
+    const id = Date.now() + Math.random()
+    setToasts(prev => [...prev, { id, message, type, duration }])
+  }
+
+  const removeToast = (id) => {
+    setToasts(prev => prev.filter(toast => toast.id !== id))
+  }
 
   // Initialize Telegram Mini App
   useEffect(() => {
@@ -43,12 +55,15 @@ function App() {
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item.id === product.id)
       if (existingItem) {
-        return prevCart.map(item =>
+        const updatedCart = prevCart.map(item =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
+        showToast(`${product.name} quantity updated in cart!`, 'success')
+        return updatedCart
       }
+      showToast(`${product.name} added to cart!`, 'success')
       return [...prevCart, { ...product, quantity: 1 }]
     })
   }
@@ -143,6 +158,8 @@ function App() {
         )}
         
         <ContactFooter />
+        
+        <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
       </div>
     </Router>
   )

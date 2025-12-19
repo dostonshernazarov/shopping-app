@@ -1,10 +1,15 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ShoppingCart } from 'lucide-react'
+import { ShoppingCart, Check } from 'lucide-react'
 
 function ProductCard({ product, onAddToCart }) {
+  const [added, setAdded] = useState(false)
+
   const handleAddToCart = (e) => {
     e.preventDefault()
     onAddToCart(product)
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
   }
 
   return (
@@ -27,12 +32,22 @@ function ProductCard({ product, onAddToCart }) {
         <div className="product-footer">
           <span className="product-price">${product.price.toFixed(2)}</span>
           <button
-            className="btn btn-primary btn-icon"
+            className={`btn btn-primary btn-icon ${added ? 'btn-added' : ''}`}
             onClick={handleAddToCart}
-            title="Add to cart"
+            title={added ? 'Added to cart!' : 'Add to cart'}
+            disabled={added}
           >
-            <ShoppingCart size={18} />
-            Add to Cart
+            {added ? (
+              <>
+                <Check size={18} />
+                Added!
+              </>
+            ) : (
+              <>
+                <ShoppingCart size={18} />
+                Add to Cart
+              </>
+            )}
           </button>
         </div>
       </div>

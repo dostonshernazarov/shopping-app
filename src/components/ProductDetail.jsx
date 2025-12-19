@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getProductById } from '../utils/supabase'
-import { ArrowLeft, ShoppingCart, Loader } from 'lucide-react'
+import { ArrowLeft, ShoppingCart, Check, Loader } from 'lucide-react'
 
 function ProductDetail({ addToCart }) {
   const { id } = useParams()
@@ -9,6 +9,7 @@ function ProductDetail({ addToCart }) {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [added, setAdded] = useState(false)
 
   useEffect(() => {
     loadProduct()
@@ -28,7 +29,8 @@ function ProductDetail({ addToCart }) {
 
   const handleAddToCart = () => {
     addToCart(product)
-    // Optional: Show a notification or redirect to cart
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
   }
 
   if (loading) {
@@ -82,11 +84,21 @@ function ProductDetail({ addToCart }) {
           </div>
 
           <button
-            className="btn btn-primary btn-large btn-icon"
+            className={`btn btn-primary btn-large btn-icon ${added ? 'btn-added' : ''}`}
             onClick={handleAddToCart}
+            disabled={added}
           >
-            <ShoppingCart size={24} />
-            Add to Cart
+            {added ? (
+              <>
+                <Check size={24} />
+                Added to Cart!
+              </>
+            ) : (
+              <>
+                <ShoppingCart size={24} />
+                Add to Cart
+              </>
+            )}
           </button>
 
           {!product.in_stock && (
