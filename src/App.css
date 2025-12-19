@@ -1561,8 +1561,13 @@ body.telegram-app .toast {
     gap: var(--spacing-sm);
   }
   
-  .nav-link span {
+  .nav-link span:not(.cart-badge) {
     display: none;
+  }
+  
+  /* Keep cart badge visible even when text is hidden */
+  .cart-link .cart-badge {
+    display: flex !important;
   }
   
   .logo span {
@@ -1609,6 +1614,30 @@ body.telegram-app .nav-link:first-of-type {
 
 body.telegram-app .nav-link:first-child {
   display: none;
+}
+
+/* Ensure cart link is always visible in Telegram */
+body.telegram-app .cart-link {
+  display: flex !important;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+body.telegram-app .cart-link svg {
+  display: block !important;
+  flex-shrink: 0;
+}
+
+/* Hide cart text but keep icon visible */
+body.telegram-app .cart-link > span:not(.cart-badge) {
+  display: none;
+}
+
+body.telegram-app .cart-badge {
+  display: flex !important;
+  position: absolute;
+  top: -8px;
+  right: -8px;
 }
 }
 
