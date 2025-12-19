@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ShoppingCart, Check } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 function ProductCard({ product, onAddToCart }) {
+  const { t } = useLanguage()
   const [added, setAdded] = useState(false)
 
   const handleAddToCart = (e) => {
@@ -34,18 +36,18 @@ function ProductCard({ product, onAddToCart }) {
           <button
             className={`btn btn-primary btn-icon ${added ? 'btn-added' : ''}`}
             onClick={handleAddToCart}
-            title={added ? 'Added to cart!' : 'Add to cart'}
+            title={added ? t('product.addedToCart') : t('product.addToCart')}
             disabled={added}
           >
             {added ? (
               <>
                 <Check size={18} />
-                Added!
+                {t('product.added')}
               </>
             ) : (
               <>
                 <ShoppingCart size={18} />
-                Add to Cart
+                {t('product.addToCart')}
               </>
             )}
           </button>

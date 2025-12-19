@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { getProductById } from '../utils/supabase'
+import { useLanguage } from '../contexts/LanguageContext'
 import { ArrowLeft, ShoppingCart, Check, Loader } from 'lucide-react'
 
 function ProductDetail({ addToCart }) {
+  const { t } = useLanguage()
   const { id } = useParams()
   const navigate = useNavigate()
   const [product, setProduct] = useState(null)
@@ -37,7 +39,7 @@ function ProductDetail({ addToCart }) {
     return (
       <div className="loading-container">
         <Loader className="spinner" size={48} />
-        <p>Loading product...</p>
+        <p>{t('common.loading')}</p>
       </div>
     )
   }
@@ -45,10 +47,10 @@ function ProductDetail({ addToCart }) {
   if (error || !product) {
     return (
       <div className="error-container">
-        <h2>Product not found</h2>
-        <p>{error || 'The product you are looking for does not exist.'}</p>
+        <h2>{t('common.error')}</h2>
+        <p>{error || t('common.error')}</p>
         <button onClick={() => navigate('/')} className="btn btn-primary">
-          Back to Home
+          {t('common.home')}
         </button>
       </div>
     )
@@ -58,7 +60,7 @@ function ProductDetail({ addToCart }) {
     <div className="container">
       <button onClick={() => navigate(-1)} className="btn btn-secondary btn-back">
         <ArrowLeft size={20} />
-        Back
+        {t('product.back')}
       </button>
 
       <div className="product-detail">
@@ -79,7 +81,7 @@ function ProductDetail({ addToCart }) {
           <p className="product-detail-price">${product.price.toFixed(2)}</p>
           
           <div className="product-detail-description">
-            <h2>Description</h2>
+            <h2>{t('product.description')}</h2>
             <p>{product.full_description || product.brief_description}</p>
           </div>
 
@@ -91,18 +93,18 @@ function ProductDetail({ addToCart }) {
             {added ? (
               <>
                 <Check size={24} />
-                Added to Cart!
+                {t('product.addedToCart')}
               </>
             ) : (
               <>
                 <ShoppingCart size={24} />
-                Add to Cart
+                {t('product.addToCart')}
               </>
             )}
           </button>
 
           {!product.in_stock && (
-            <p className="out-of-stock">Currently out of stock</p>
+            <p className="out-of-stock">{t('product.outOfStock')}</p>
           )}
         </div>
       </div>

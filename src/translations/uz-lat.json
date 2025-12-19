@@ -1,0 +1,98 @@
+{
+  "app": {
+    "name": "FoodMarket",
+    "tagline": "Sizning eshigingizga yetkazib beriladigan yangi mahsulotlar"
+  },
+  "home": {
+    "title": "Sizning eshigingizga yangi ovqat mahsulotlari",
+    "subtitle": "Bizning premium sifatli ovqat mahsulotlari tanlovidan xarid qiling",
+    "allProducts": "Barcha mahsulotlar",
+    "noProducts": "Bu kategoriyada mahsulot topilmadi."
+  },
+  "product": {
+    "addToCart": "Savatchaga qo'shish",
+    "addedToCart": "Savatchaga qo'shildi!",
+    "added": "Qo'shildi!",
+    "quantityUpdated": "miqdori yangilandi!",
+    "description": "Tavsif",
+    "outOfStock": "Hozirda omborda yo'q",
+    "back": "Orqaga"
+  },
+  "cart": {
+    "title": "Savatcha",
+    "empty": "Sizning savatchangiz bo'sh",
+    "emptyMessage": "Boshlash uchun bir nechta mazali mahsulot qo'shing!",
+    "continueShopping": "Xaridni davom ettirish",
+    "total": "Jami",
+    "checkout": "Buyurtma berish",
+    "remove": "O'chirish",
+    "decrease": "Kamaytirish",
+    "increase": "Ko'paytirish"
+  },
+  "checkout": {
+    "title": "Buyurtma berish",
+    "orderSummary": "Buyurtma xulosasi",
+    "contactInfo": "Aloqa ma'lumotlari",
+    "phoneNumber": "Telefon raqami",
+    "phonePlaceholder": "+998 90 123 45 67",
+    "phoneHint": "Biz sizga shu raqam orqali aloqaga chiqamiz",
+    "placeOrder": "Buyurtma berish",
+    "placingOrder": "Buyurtma berilmoqda...",
+    "success": "Buyurtma muvaffaqiyatli berildi!",
+    "successMessage": "Buyurtmangiz uchun rahmat. Biz sizga {phone} raqamiga tez orada aloqaga chiqamiz.",
+    "successNote": "Bizning admin jamoasi xabardor qilindi va tez orada buyurtmangizni qayta ishlaydi.",
+    "backToCart": "Savatchaga qaytish",
+    "error": "Buyurtma berishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring."
+  },
+  "admin": {
+    "login": "Admin kirish",
+    "loginPrompt": "Admin paneliga kirish uchun parolingizni kiriting",
+    "password": "Parol",
+    "passwordPlaceholder": "Admin parolini kiriting",
+    "invalidPassword": "Noto'g'ri parol",
+    "panel": "Admin panel",
+    "logout": "Chiqish",
+    "products": "Mahsulotlar",
+    "categories": "Kategoriyalar",
+    "orders": "Buyurtmalar",
+    "manageProducts": "Mahsulotlarni boshqarish",
+    "manageCategories": "Kategoriyalarni boshqarish",
+    "addProduct": "Mahsulot qo'shish",
+    "addCategory": "Kategoriya qo'shish",
+    "cancel": "Bekor qilish",
+    "adding": "Qo'shilmoqda...",
+    "noProducts": "Hali mahsulot yo'q. Birinchi mahsulotingizni qo'shing!",
+    "noCategories": "Hali kategoriya yo'q. Birinchi kategoriyangizni qo'shing!",
+    "deleteConfirm": "Ushbu mahsulotni o'chirishni xohlaysizmi?",
+    "deleteCategoryConfirm": "Ishonchingiz komilmi? Ushbu kategoriyadagi mahsulotlar kategoriyasiz bo'ladi.",
+    "recentOrders": "So'nggi buyurtmalar",
+    "noOrders": "Hali buyurtma yo'q.",
+    "orderId": "Buyurtma #{id}",
+    "pending": "Kutilmoqda",
+    "done": "Bajarildi",
+    "markAsDone": "Bajarildi deb belgilash",
+    "updating": "Yangilanmoqda...",
+    "items": "Mahsulotlar:",
+    "productName": "Mahsulot nomi",
+    "price": "Narx",
+    "briefDescription": "Qisqa tavsif",
+    "fullDescription": "To'liq tavsif",
+    "imageUrl": "Rasm URL",
+    "imageHint": "Unsplash, Imgur yoki Supabase Storage dan foydalanishingiz mumkin",
+    "inStock": "Omborda mavjud",
+    "category": "Kategoriya",
+    "selectCategory": "Kategoriyani tanlang"
+  },
+  "common": {
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik",
+    "tryAgain": "Qayta urinib ko'ring",
+    "home": "Bosh sahifa",
+    "cart": "Savatcha",
+    "admin": "Admin"
+  },
+  "footer": {
+    "copyright": "© 2024 FoodMarket. Sizning eshigingizga yetkazib beriladigan yangi mahsulotlar."
+  }
+}
+

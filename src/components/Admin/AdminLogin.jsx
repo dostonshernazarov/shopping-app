@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { ShieldCheck } from 'lucide-react'
+import { useLanguage } from '../../contexts/LanguageContext'
 
 function AdminLogin({ onLogin }) {
+  const { t } = useLanguage()
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
@@ -14,7 +16,7 @@ function AdminLogin({ onLogin }) {
     if (password === adminPassword) {
       onLogin()
     } else {
-      setError('Invalid password')
+      setError(t('admin.invalidPassword'))
     }
   }
 
@@ -23,12 +25,12 @@ function AdminLogin({ onLogin }) {
       <div className="admin-login">
         <div className="admin-login-card">
           <ShieldCheck size={48} className="admin-icon" />
-          <h1>Admin Login</h1>
-          <p>Enter your password to access the admin panel</p>
+          <h1>{t('admin.login')}</h1>
+          <p>{t('admin.loginPrompt')}</p>
           
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">{t('admin.password')}</label>
               <input
                 type="password"
                 id="password"
@@ -37,7 +39,7 @@ function AdminLogin({ onLogin }) {
                   setPassword(e.target.value)
                   setError('')
                 }}
-                placeholder="Enter admin password"
+                placeholder={t('admin.passwordPlaceholder')}
                 className="form-control"
                 autoFocus
               />
@@ -50,7 +52,7 @@ function AdminLogin({ onLogin }) {
             )}
 
             <button type="submit" className="btn btn-primary btn-large">
-              Login
+              {t('admin.login')}
             </button>
           </form>
         </div>

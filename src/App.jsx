@@ -8,9 +8,12 @@ import AdminLogin from './components/Admin/AdminLogin'
 import AdminPanel from './components/Admin/AdminPanel'
 import ContactFooter from './components/ContactFooter'
 import ToastContainer from './components/ToastContainer'
+import LanguageSelector from './components/LanguageSelector'
+import { useLanguage } from './contexts/LanguageContext'
 import { initTelegramApp, isTelegramApp } from './utils/telegram'
 
 function App() {
+  const { t } = useLanguage()
   const [cart, setCart] = useState([])
   const [isAdmin, setIsAdmin] = useState(false)
   const [isTelegram, setIsTelegram] = useState(false)
@@ -60,10 +63,10 @@ function App() {
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
-        showToast(`${product.name} quantity updated in cart!`, 'success')
+        showToast(`${product.name} ${t('product.quantityUpdated')}`, 'success')
         return updatedCart
       }
-      showToast(`${product.name} added to cart!`, 'success')
+      showToast(`${product.name} ${t('product.addedToCart')}`, 'success')
       return [...prevCart, { ...product, quantity: 1 }]
     })
   }
@@ -97,23 +100,24 @@ function App() {
           <div className="container">
             <Link to="/" className="logo">
               <Store size={32} />
-              <span>FoodMarket</span>
+              <span>{t('app.name')}</span>
             </Link>
             <nav className="nav">
               <Link to="/" className="nav-link">
-                Home
+                {t('common.home')}
               </Link>
               <Link to="/cart" className="nav-link cart-link">
                 <ShoppingCart size={20} />
-                <span>Cart</span>
+                <span>{t('common.cart')}</span>
                 {cartItemsCount > 0 && (
                   <span className="cart-badge">{cartItemsCount}</span>
                 )}
               </Link>
               <Link to="/admin" className="nav-link admin-link">
                 <ShieldCheck size={20} />
-                <span>Admin</span>
+                <span>{t('common.admin')}</span>
               </Link>
+              <LanguageSelector />
             </nav>
           </div>
         </header>
@@ -152,7 +156,7 @@ function App() {
         {!isTelegram && (
           <footer className="footer">
             <div className="container">
-              <p>&copy; 2024 FoodMarket. Fresh products delivered to your door.</p>
+              <p>{t('footer.copyright')}</p>
             </div>
           </footer>
         )}

@@ -1,6 +1,9 @@
 import { Grid } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 function CategoryFilter({ categories, selectedCategory, onSelectCategory }) {
+  const { t } = useLanguage()
+  
   return (
     <div className="category-filter">
       <button
@@ -8,7 +11,7 @@ function CategoryFilter({ categories, selectedCategory, onSelectCategory }) {
         onClick={() => onSelectCategory(null)}
       >
         <Grid size={20} />
-        All Products
+        {t('home.allProducts')}
       </button>
       {categories.map(category => (
         <button

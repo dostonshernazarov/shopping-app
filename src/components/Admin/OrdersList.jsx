@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Phone, Calendar, CheckCircle, Clock } from 'lucide-react'
 import { updateOrderStatus } from '../../utils/supabase'
+import { useLanguage } from '../../contexts/LanguageContext'
 
 function OrdersList({ orders, onUpdate }) {
+  const { t } = useLanguage()
   const [updating, setUpdating] = useState(null)
 
   const handleStatusChange = async (orderId, newStatus) => {
@@ -20,30 +22,30 @@ function OrdersList({ orders, onUpdate }) {
   if (orders.length === 0) {
     return (
       <div className="admin-tab-content">
-        <h2>Orders</h2>
-        <p className="empty-message">No orders yet.</p>
+        <h2>{t('admin.orders')}</h2>
+        <p className="empty-message">{t('admin.noOrders')}</p>
       </div>
     )
   }
 
   return (
     <div className="admin-tab-content">
-      <h2>Recent Orders</h2>
+      <h2>{t('admin.recentOrders')}</h2>
       <div className="orders-list">
         {orders.map(order => (
           <div key={order.id} className="order-card">
             <div className="order-header">
-              <div className="order-id">Order #{order.id}</div>
+              <div className="order-id">{t('admin.orderId').replace('{id}', order.id)}</div>
               <div className={`order-status status-${order.status}`}>
                 {order.status === 'pending' ? (
                   <>
                     <Clock size={14} />
-                    <span>Pending</span>
+                    <span>{t('admin.pending')}</span>
                   </>
                 ) : (
                   <>
                     <CheckCircle size={14} />
-                    <span>Done</span>
+                    <span>{t('admin.done')}</span>
                   </>
                 )}
               </div>
@@ -61,7 +63,7 @@ function OrdersList({ orders, onUpdate }) {
             </div>
 
             <div className="order-items">
-              <h4>Items:</h4>
+              <h4>{t('admin.items')}</h4>
               {order.order_items && order.order_items.map((item, idx) => (
                 <div key={idx} className="order-item">
                   <span>{item.product_name} x {item.quantity}</span>
@@ -72,7 +74,7 @@ function OrdersList({ orders, onUpdate }) {
 
             <div className="order-footer">
               <div className="order-total">
-                <strong>Total: ${order.total_amount.toFixed(2)}</strong>
+                <strong>{t('cart.total')}: ${order.total_amount.toFixed(2)}</strong>
               </div>
               
               {order.status === 'pending' && (
@@ -82,7 +84,7 @@ function OrdersList({ orders, onUpdate }) {
                   disabled={updating === order.id}
                 >
                   <CheckCircle size={18} />
-                  {updating === order.id ? 'Updating...' : 'Mark as Done'}
+                  {updating === order.id ? t('admin.updating') : t('admin.markAsDone')}
                 </button>
               )}
             </div>

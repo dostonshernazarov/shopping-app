@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { ArrowLeft, CheckCircle } from 'lucide-react'
 import { createOrder } from '../utils/supabase'
 import { sendOrderNotification } from '../utils/telegram'
+import { useLanguage } from '../contexts/LanguageContext'
 
 function Checkout({ cart, total, onBack, onSuccess }) {
+  const { t } = useLanguage()
   const [phoneNumber, setPhoneNumber] = useState('')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -13,7 +15,7 @@ function Checkout({ cart, total, onBack, onSuccess }) {
     e.preventDefault()
     
     if (!phoneNumber.trim()) {
-      setError('Please enter your phone number')
+      setError(t('checkout.phoneNumber') + ' ' + t('common.error'))
       return
     }
 
@@ -53,7 +55,7 @@ function Checkout({ cart, total, onBack, onSuccess }) {
         onSuccess()
       }, 2000)
     } catch (err) {
-      setError('Failed to place order. Please try again.')
+      setError(t('checkout.error'))
       console.error('Order error:', err)
     } finally {
       setLoading(false)
@@ -65,10 +67,10 @@ function Checkout({ cart, total, onBack, onSuccess }) {
       <div className="container">
         <div className="checkout-success">
           <CheckCircle size={64} className="success-icon" />
-          <h2>Order Placed Successfully!</h2>
-          <p>Thank you for your order. We will contact you at {phoneNumber} shortly.</p>
+          <h2>{t('checkout.success')}</h2>
+          <p>{t('checkout.successMessage', { phone: phoneNumber })}</p>
           <p className="success-note">
-            Our admin team has been notified and will process your order soon.
+            {t('checkout.successNote')}
           </p>
         </div>
       </div>
@@ -79,15 +81,15 @@ function Checkout({ cart, total, onBack, onSuccess }) {
     <div className="container">
       <button onClick={onBack} className="btn btn-secondary btn-back">
         <ArrowLeft size={20} />
-        Back to Cart
+        {t('checkout.backToCart')}
       </button>
 
       <div className="checkout-container">
-        <h1>Checkout</h1>
+        <h1>{t('checkout.title')}</h1>
 
         <div className="checkout-content">
           <div className="order-summary">
-            <h2>Order Summary</h2>
+            <h2>{t('checkout.orderSummary')}</h2>
             <div className="order-items">
               {cart.map(item => (
                 <div key={item.id} className="order-item">
@@ -107,21 +109,21 @@ function Checkout({ cart, total, onBack, onSuccess }) {
           </div>
 
           <form onSubmit={handleSubmit} className="checkout-form">
-            <h2>Contact Information</h2>
+            <h2>{t('checkout.contactInfo')}</h2>
             
             <div className="form-group">
-              <label htmlFor="phone">Phone Number *</label>
+              <label htmlFor="phone">{t('checkout.phoneNumber')} *</label>
               <input
                 type="tel"
                 id="phone"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                placeholder="+1 (555) 123-4567"
+                placeholder={t('checkout.phonePlaceholder')}
                 className="form-control"
                 required
               />
               <small className="form-hint">
-                We'll contact you at this number to confirm your order
+                {t('checkout.phoneHint')}
               </small>
             </div>
 
@@ -136,7 +138,7 @@ function Checkout({ cart, total, onBack, onSuccess }) {
               className="btn btn-primary btn-large"
               disabled={loading}
             >
-              {loading ? 'Placing Order...' : 'Place Order'}
+              {loading ? t('checkout.placingOrder') : t('checkout.placeOrder')}
             </button>
           </form>
         </div>

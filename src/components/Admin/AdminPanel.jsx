@@ -3,9 +3,11 @@ import { getProducts, getCategories, getOrders } from '../../utils/supabase'
 import ProductForm from './ProductForm'
 import CategoryForm from './CategoryForm'
 import OrdersList from './OrdersList'
+import { useLanguage } from '../../contexts/LanguageContext'
 import { Package, FolderTree, ShoppingBag, LogOut, Plus } from 'lucide-react'
 
 function AdminPanel({ onLogout }) {
+  const { t } = useLanguage()
   const [activeTab, setActiveTab] = useState('products')
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
@@ -38,10 +40,10 @@ function AdminPanel({ onLogout }) {
     <div className="container">
       <div className="admin-panel">
         <div className="admin-header">
-          <h1>Admin Panel</h1>
+          <h1>{t('admin.panel')}</h1>
           <button onClick={onLogout} className="btn btn-secondary btn-icon">
             <LogOut size={18} />
-            Logout
+            {t('admin.logout')}
           </button>
         </div>
 
@@ -51,21 +53,21 @@ function AdminPanel({ onLogout }) {
             onClick={() => setActiveTab('products')}
           >
             <Package size={20} />
-            Products ({products.length})
+            {t('admin.products')} ({products.length})
           </button>
           <button
             className={`admin-tab ${activeTab === 'categories' ? 'active' : ''}`}
             onClick={() => setActiveTab('categories')}
           >
             <FolderTree size={20} />
-            Categories ({categories.length})
+            {t('admin.categories')} ({categories.length})
           </button>
           <button
             className={`admin-tab ${activeTab === 'orders' ? 'active' : ''}`}
             onClick={() => setActiveTab('orders')}
           >
             <ShoppingBag size={20} />
-            Orders ({orders.length})
+            {t('admin.orders')} ({orders.length})
           </button>
         </div>
 
@@ -93,18 +95,19 @@ function AdminPanel({ onLogout }) {
 }
 
 function ProductsTab({ products, categories, onUpdate }) {
+  const { t } = useLanguage()
   const [showForm, setShowForm] = useState(false)
 
   return (
     <div className="admin-tab-content">
       <div className="admin-tab-header">
-        <h2>Manage Products</h2>
+        <h2>{t('admin.manageProducts')}</h2>
         <button
           onClick={() => setShowForm(!showForm)}
           className="btn btn-primary btn-icon"
         >
           <Plus size={18} />
-          {showForm ? 'Cancel' : 'Add Product'}
+          {showForm ? t('admin.cancel') : t('admin.addProduct')}
         </button>
       </div>
 
@@ -129,18 +132,19 @@ function ProductsTab({ products, categories, onUpdate }) {
 }
 
 function CategoriesTab({ categories, onUpdate }) {
+  const { t } = useLanguage()
   const [showForm, setShowForm] = useState(false)
 
   return (
     <div className="admin-tab-content">
       <div className="admin-tab-header">
-        <h2>Manage Categories</h2>
+        <h2>{t('admin.manageCategories')}</h2>
         <button
           onClick={() => setShowForm(!showForm)}
           className="btn btn-primary btn-icon"
         >
           <Plus size={18} />
-          {showForm ? 'Cancel' : 'Add Category'}
+          {showForm ? t('admin.cancel') : t('admin.addCategory')}
         </button>
       </div>
 

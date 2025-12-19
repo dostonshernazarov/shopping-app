@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react'
+import { useLanguage } from '../contexts/LanguageContext'
 import Checkout from './Checkout'
 
 function Cart({ cart, updateQuantity, removeFromCart, clearCart }) {
+  const { t } = useLanguage()
   const [showCheckout, setShowCheckout] = useState(false)
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -23,10 +25,10 @@ function Cart({ cart, updateQuantity, removeFromCart, clearCart }) {
       <div className="container">
         <div className="empty-cart">
           <ShoppingBag size={64} />
-          <h2>Your cart is empty</h2>
-          <p>Add some delicious products to get started!</p>
+          <h2>{t('cart.empty')}</h2>
+          <p>{t('cart.emptyMessage')}</p>
           <a href="/" className="btn btn-primary">
-            Continue Shopping
+            {t('cart.continueShopping')}
           </a>
         </div>
       </div>
@@ -36,7 +38,7 @@ function Cart({ cart, updateQuantity, removeFromCart, clearCart }) {
   return (
     <div className="container">
       <div className="cart-container">
-        <h1>Shopping Cart</h1>
+        <h1>{t('cart.title')}</h1>
         
         <div className="cart-items">
           {cart.map(item => (
@@ -89,14 +91,14 @@ function Cart({ cart, updateQuantity, removeFromCart, clearCart }) {
 
         <div className="cart-summary">
           <div className="cart-total">
-            <span>Total:</span>
+            <span>{t('cart.total')}:</span>
             <span className="total-amount">${total.toFixed(2)}</span>
           </div>
           <button
             onClick={() => setShowCheckout(true)}
             className="btn btn-primary btn-large"
           >
-            Proceed to Checkout
+            {t('cart.checkout')}
           </button>
         </div>
       </div>
