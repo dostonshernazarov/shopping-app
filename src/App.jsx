@@ -98,14 +98,18 @@ function App() {
       <div className="app">
         <header className="header">
           <div className="container">
-            <Link to="/" className="logo">
-              <Store size={32} />
-              <span>{t('app.name')}</span>
-            </Link>
-            <nav className="nav">
-              <Link to="/" className="nav-link">
-                {t('common.home')}
+            {!isTelegram && (
+              <Link to="/" className="logo">
+                <Store size={32} />
+                <span>{t('app.name')}</span>
               </Link>
+            )}
+            <nav className="nav">
+              {!isTelegram && (
+                <Link to="/" className="nav-link">
+                  {t('common.home')}
+                </Link>
+              )}
               <Link to="/cart" className="nav-link cart-link">
                 <ShoppingCart size={20} />
                 <span>{t('common.cart')}</span>

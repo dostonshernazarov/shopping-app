@@ -1517,9 +1517,25 @@ body.telegram-app .toast {
     margin-bottom: var(--spacing-md);
   }
   
-  body.telegram-app .header {
-    padding: var(--spacing-sm) 0;
-  }
+body.telegram-app .header {
+  padding: var(--spacing-sm) 0;
+}
+
+body.telegram-app .header .container {
+  justify-content: flex-end;
+}
+
+body.telegram-app .logo {
+  display: none;
+}
+
+body.telegram-app .nav-link:first-of-type {
+  display: none;
+}
+
+body.telegram-app .nav-link:first-child {
+  display: none;
+}
 }
 
 @media (max-width: 480px) {
