@@ -6,6 +6,7 @@ import ProductDetail from './components/ProductDetail'
 import Cart from './components/Cart'
 import AdminLogin from './components/Admin/AdminLogin'
 import AdminPanel from './components/Admin/AdminPanel'
+import ContactFooter from './components/ContactFooter'
 import { initTelegramApp, isTelegramApp } from './utils/telegram'
 
 function App() {
@@ -133,11 +134,15 @@ function App() {
           </Routes>
         </main>
 
-        <footer className="footer">
-          <div className="container">
-            <p>&copy; 2024 FoodMarket. Fresh products delivered to your door.</p>
-          </div>
-        </footer>
+        {!isTelegram && (
+          <footer className="footer">
+            <div className="container">
+              <p>&copy; 2024 FoodMarket. Fresh products delivered to your door.</p>
+            </div>
+          </footer>
+        )}
+        
+        <ContactFooter />
       </div>
     </Router>
   )
